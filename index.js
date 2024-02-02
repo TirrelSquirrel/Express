@@ -15,6 +15,13 @@ const friends = [
   },
 ];
 
+app.use((req, res, next) => {
+  const start = Date.now();
+  next();
+  const delta = Date.now() - start;
+  console.log(`${req.method} ${req.url} ${delta}ms`);
+});
+
 app.get("/friends", (req, res) => {
   res.json(friends);
 });
@@ -27,7 +34,7 @@ app.get("/friends/:friendId", (req, res) => {
     res.json(friend);
   } else {
     res.status(404).json({
-      error: 'Friend does not exist'
+      error: "Friend does not exist",
     });
   }
 });
