@@ -26,7 +26,7 @@ app.use(express.json());
 
 app.post("/friends", (req, res) => {
   if (!req.body.name) {
-    res.status(400).json({
+    return res.status(400).json({
       error: "Missing friend name",
     });
   }
